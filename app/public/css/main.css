@@ -1,0 +1,25 @@
+.segment {
+  /* background: #f5f5f5; */
+  color: #514d6a;
+  font-weight: bolder;
+  border: none;
+  border-bottom: 1px solid #d0d0d0;
+}
+.effort-head {
+  font-size: smaller;
+  /* background-color: #F5EDED; */
+}
+.effort {margin-left: 20px;}
+.effort .time {
+
+}
+.effort .athleteName {
+
+}
+table.leaderboard-table > tbody > tr > td {
+  border: none;
+}
+table.leaderboard-table > tbody > tr.effort-head > td {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}

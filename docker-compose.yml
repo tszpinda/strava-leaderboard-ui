@@ -17,3 +17,7 @@ services:
         max-file: "10"
     ports:
       - "3000:3000"
+    environment:
+      - http_proxy
+      - https_proxy
+      - no_proxy

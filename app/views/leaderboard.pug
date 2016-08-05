@@ -1,5 +1,27 @@
-html
+doctype html
+html(lang='en')
   head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible' content='IE=edge')
+    meta(name='viewport' content='width=device-width, initial-scale=1')
     title= title
+    link(href='/bootstrap/css/bootstrap.min.css', rel='stylesheet')
+    link(href='/css/main.css', rel='stylesheet')
+    script(src='/bootstrap/js/bootstrap.js')
   body
     h1= message
+    span= error
+    div.container
+      table.table.leaderboard-table
+        each r in results
+          tr.segment
+            td(colspan=3) #{r.segment.name}
+          tr.effort-head
+            td Athlete
+            td Time
+          each effort in r.efforts
+            tr.effort
+              td.athleteName #{effort.athleteName}
+              td.time #{effort.time}
+          tr.break
+            td(colspan=3) &nbsp;
