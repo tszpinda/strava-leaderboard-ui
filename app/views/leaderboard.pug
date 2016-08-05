@@ -7,11 +7,14 @@ html(lang='en')
     title= title
     link(href='/bootstrap/css/bootstrap.min.css', rel='stylesheet')
     link(href='/css/main.css', rel='stylesheet')
+    script(src='/js/jquery.min.js')
     script(src='/bootstrap/js/bootstrap.js')
   body
     h1= message
     span= error
     div.container
+      div.row
+        a(href="/connect/strava") Connect
       table.table.leaderboard-table
         each r in results
           tr.segment

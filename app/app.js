@@ -6,8 +6,11 @@ const bodyParser = require('body-parser');
 const cors = require('./cors');
 const status = require('./status');
 const leaderboard = require('./leaderboard');
+const passport = require('passport');
 
 const port = 3000;
+
+require('./auth')(passport);
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
@@ -17,6 +20,11 @@ app.use(cors);
 app.use('/status', status);
 app.use('/leaderboard', leaderboard);
 app.use(express.static('public'));
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+require('./auth-route')(app, passport);
 
 app.use(function(err, req, res, done) {
   if(err)
