@@ -1,0 +1,26 @@
+{
+  "name": "kick-start",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "bluebird": "^3.3.4",
+    "body-parser": "^1.15.0",
+    "co": "^4.6.0",
+    "co-express": "^1.2.1",
+    "express": "^4.13.4",
+    "winston": "^2.2.0",
+    "pug": "^2.0.0-beta4"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-eslint": "^2.0.0",
+    "gulp-mocha": "^2.2.0",
+    "gulp-mocha-co": "^0.4.1-co.3",
+    "mocha": "^2.5.3",
+    "request": "^2.69.0"
+  },
+  "scripts": {
+    "test": "gulp test",
+    "start": "gulp watch"
+  }
+}
