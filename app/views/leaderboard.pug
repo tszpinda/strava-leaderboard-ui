@@ -10,21 +10,21 @@ html(lang='en')
     script(src='/js/jquery.min.js')
     script(src='/bootstrap/js/bootstrap.js')
   body
-    h1= message
-    span= error
     div.container
       div.row
-        a(href="/connect/strava") Connect
-      table.table.leaderboard-table
-        each r in results
-          tr.segment
-            td(colspan=3) #{r.segment.name}
-          tr.effort-head
-            td Athlete
-            td Time
-          each effort in r.efforts
-            tr.effort
-              td.athleteName #{effort.athleteName}
-              td.time #{effort.time}
-          tr.break
-            td(colspan=3) &nbsp;
+        h1= message
+        span= error
+      div.row
+        table.table.leaderboard-table
+          each r in results
+            tr.segment
+              td(colspan=3) #{r.segment.name}
+            tr.effort-head
+              td Athlete
+              td Time
+            each effort in r.efforts
+              tr.effort
+                td.athleteName #{effort.athleteName}
+                td.time #{effort.time}
+            tr.break
+              td(colspan=3) &nbsp;

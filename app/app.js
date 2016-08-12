@@ -1,30 +1,35 @@
 'use strict';
 const express = require('express');
-const app = express();
 const log = require('./log');
 const bodyParser = require('body-parser');
 const cors = require('./cors');
 const status = require('./status');
 const leaderboard = require('./leaderboard');
-const passport = require('passport');
+const profile = require('./profile');
+const session = require('express-session');
 
 const port = 3000;
+const cookieSecret = 'abc1234';
 
-require('./auth')(passport);
+const app = express();
+
+app.set('view engine', 'pug');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
-app.set('view engine', 'pug');
+app.use(session({secret: cookieSecret,
+                 resave: false,
+                 saveUninitialized: false
+                 }));
 
-app.use(cors);
-app.use('/status', status);
-app.use('/leaderboard', leaderboard);
+require('./auth')(app);
 app.use(express.static('public'));
 
-app.use(passport.initialize());
-app.use(passport.session());
+app.use(cors);
 
-require('./auth-route')(app, passport);
+app.use('/status', status);
+app.use('/leaderboard', leaderboard);
+app.use('/profile', profile);
 
 app.use(function(err, req, res, done) {
   if(err)
