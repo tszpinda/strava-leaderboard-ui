@@ -8,7 +8,7 @@ module.exports = function(passport) {
   router.get('/auth/strava', passport.authenticate('strava'));
 
   router.get('/auth/strava/callback', passport.authenticate('strava', {
-    successRedirect: '/leaderboard/view',
+    successReturnToOrRedirect: '/leaderboard/view',
     failureRedirect: '/error-auth'
   }));
 
