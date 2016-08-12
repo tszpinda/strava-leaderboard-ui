@@ -7,21 +7,24 @@ html(lang='en')
     title= title
     link(href='/bootstrap/css/bootstrap.min.css', rel='stylesheet')
     link(href='/css/main.css', rel='stylesheet')
+    script(src='/js/jquery.min.js')
     script(src='/bootstrap/js/bootstrap.js')
   body
-    h1= message
-    span= error
     div.container
-      table.table.leaderboard-table
-        each r in results
-          tr.segment
-            td(colspan=3) #{r.segment.name}
-          tr.effort-head
-            td Athlete
-            td Time
-          each effort in r.efforts
-            tr.effort
-              td.athleteName #{effort.athleteName}
-              td.time #{effort.time}
-          tr.break
-            td(colspan=3) &nbsp;
+      div.row
+        h1= message
+        span= error
+      div.row
+        table.table.leaderboard-table
+          each r in results
+            tr.segment
+              td(colspan=3) #{r.segment.name}
+            tr.effort-head
+              td Athlete
+              td Time
+            each effort in r.efforts
+              tr.effort
+                td.athleteName #{effort.athleteName}
+                td.time #{effort.time}
+            tr.break
+              td(colspan=3) &nbsp;

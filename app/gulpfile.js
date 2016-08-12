@@ -17,7 +17,7 @@ gulp.task('eslint', function() {
 gulp.task('watch', function(){
    this.failOnError = false;
    gulp.start(['test']);
-   gulp.watch(['*.js', '**/*.js', '*.json', '**/*.json', '!node_modules/**'], ['eslint', 'test']);
+   gulp.watch(['*.pug', '*.js', '**/*.js', '*.json', '**/*.json', '!node_modules/**'], ['eslint', 'test']);
 });
 
 gulp.task('default', ['eslint', 'watch']);

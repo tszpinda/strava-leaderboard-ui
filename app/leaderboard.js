@@ -3,19 +3,23 @@ var express = require('express');
 var router = express.Router(); // eslint-disable-line new-cap
 var strava = require('strava-v3');
 var async = require('async');
+var ensureLoggedIn = require('connect-ensure-login').ensureLoggedIn;
 
-router.get('/view', function(req, res) {
-  segmentList().then(segments => async.map(segments, leaderboardList, (err, results)=>{
-    res.render('leaderboard', {title: 'Leaderboard', message: 'Leaderboard', error: err, results: results});
+router.get('/view', ensureLoggedIn('/auth/strava'), function(req, res) {
+  var stravaToken = req.user.stravaToken;
+  segmentList(req.user.stravaToken)
+    .then(segments => async.map(segments, leaderboardList.bind({authToken:stravaToken}), (err, results)=>{
+        res.render('leaderboard', {title: 'Leaderboard', message: 'Leaderboard', error: err, results: results});
   }))
   .catch(err => {
-    res.render('leaderboard', {title: 'Leaderboard Error', message: 'no no not ok', error: err});
+    console.log(err);
+    res.render('error', {title: 'Leaderboard Error', message: 'not ok', error: err});
   });
 });
 
-function segmentList() {
+function segmentList(authToken) {
     return new Promise((resolve, reject)=> {
-        strava.segments.listStarred({page:1, per_page:130}, (err, payload) => { // eslint-disable-line camelcase
+        strava.segments.listStarred({access_token: authToken, page:1, per_page:130}, (err, payload) => { // eslint-disable-line camelcase
             if(err)return reject(err);
             return resolve(payload);
         });
@@ -24,14 +28,14 @@ function segmentList() {
 
 
 function leaderboardList(segment, callback) {
-    extractLeaderboardData(segment)
+    extractLeaderboardData(segment, this.authToken)
         .then((data) => callback(null, data))
         .catch((err) => callback(err, null));
 }
 
-function extractLeaderboardData(segment) {
+function extractLeaderboardData(segment, authToken) {
     return new Promise((resolve, reject)=> {
-        strava.segments.listLeaderboard({id: segment.id, following:true}, (err, payload) => {
+        strava.segments.listLeaderboard({access_token: authToken, id: segment.id, following:true}, (err, payload) => {
             if(err)return reject(err);
             var data = {segment: segment, efforts: []};
             payload.entries.map(effort => data.efforts.push(effortToLeaderboardData(effort)));

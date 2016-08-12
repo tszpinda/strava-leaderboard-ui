@@ -13,7 +13,12 @@
     "strava-v3": "^1.12.1",
     "async": "^2.0.0",
     "passport": "^0.3.2",
-    "passport-strava": "^0.2.0"
+    "passport-strava": "^0.2.0",
+    "express-session": "^1.14.0",
+    "serve-favicon": "^2.2.0",
+    "cookie-session": "^1.2.0",
+    "cookie-parser": "^1.4.3",
+    "connect-ensure-login": "^0.1.1"
   },
   "devDependencies": {
     "gulp": "^3.9.1",
