@@ -1,6 +1,6 @@
-kickstart your dev with docker & nodejs
+Stared segments & stared leaderboard
 
-simple node app running in docker & docker-compose
+run with docker & docker-compose
 
 # How do I start
 ```docker-compose up```
